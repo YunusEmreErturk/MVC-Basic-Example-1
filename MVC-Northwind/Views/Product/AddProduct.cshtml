@@ -1,0 +1,51 @@
+﻿
+@{
+    Layout = null;
+}
+
+@using MVC_Northwind.Models
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddProduct</title>
+</head>
+<body>
+    <form action="/Product/AddProduct" method="post">
+        Ürün Adı :<input type="text" name="prdName" />
+        <br />
+        <br />
+        Fiyat: <input type="number" name="prdPrice" />
+        <br />
+        <br />
+        Stok: <input type="number" name="prdStock"/>
+        <br />
+        <br />
+        Kategori:
+        <select name="prdCatID">
+            @foreach (Category item in ViewBag.catList)
+            {
+                //combobox value member / DisplayMember olayı
+                <option value="@item.CategoryID">@item.CategoryName</option>
+            }
+        </select>
+        <br />
+        <br />
+        Tedarikçi:
+        <select name="prdSupID">
+            @foreach (Supplier item in ViewBag.supList)
+            {
+                //combobox value member / DisplayMember olayı
+                <option value="@item.SupplierID">@item.CompanyName</option>
+            }
+        </select>
+        <br />
+        <br />
+        <a href="/Product/Index">Iptal</a>
+        @* Kaydet butonna basınca , içinde bulunduğu formu post etmesi lazım .Bunun için öncelikle inputun tipini butondan "submite çevirmeliyiz.tipi submit olan button'a basılınca içerisinde bulunduğu form hangi actıon'i belirtmişse,o actiona içerisindeki girilen değerleri gönderir yani post eder " *@
+        <input type="submit" value="kaydet" />
+        <br />
+    </form>
+</body>
+</html>

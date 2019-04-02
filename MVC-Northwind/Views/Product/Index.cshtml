@@ -1,0 +1,132 @@
+﻿
+@{
+    Layout = null;
+}
+@using MVC_Northwind.Models
+
+
+@*@model List<Product>*@
+@model ProductCategory
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    @*ViewBag ile*@
+    @*<table border="1">
+            <thead>
+                <tr>
+                    <td>Ürün Adı</td>
+                    <td>Fiyat</td>
+                    <td>Stok</td>
+                    <td>KategoriID</td>
+                    <td>KategoriAdi</td>
+                    <td>TedarikciID</td>
+                    <td>TedarikciAdi</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Product item in Model)
+                {
+                    <tr>
+                        <td>@item.ProductName</td>
+                        <td>@item.UnitPrice</td>
+                        <td>@item.UnitsInStock</td>
+                        <td>@item.CategoryID</td>
+                        <td>@item.Category.CategoryName</td>
+                        <td>@item.SupplierID</td>
+                        <td>@item.Supplier.CompanyName</td>
+
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+        <table border="1">
+            <thead>
+                <tr>
+                    <td>Kategori Adı</td>
+                    <td>Tanımı</td>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item2 in (List<Category>)ViewBag.Kategoriler)
+                {
+                    <tr>
+                        <td>@item2.CategoryName</td>
+                        <td>@item2.Description</td>
+                        <td></td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>*@
+
+
+    @*// --------------------------------------*@
+
+    @*Multiple objects in model yöntemi ile*@
+    <table border="1">
+        <thead>
+            <tr>
+                <td>Ürün Adı</td>
+                <td>Fiyat</td>
+                <td>Stok</td>
+                <td>KategoriID</td>
+                <td>KategoriAdi</td>
+                <td>TedarikciID</td>
+                <td>TedarikciAdi</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Product item in Model.products)
+            {
+            <tr>
+                <td>@item.ProductName</td>
+                <td>@item.UnitPrice</td>
+                <td>@item.UnitsInStock</td>
+                <td>@item.CategoryID</td>
+                <td>@item.Category.CategoryName</td>
+                <td>@item.SupplierID</td>
+                @if (item.Supplier == null)
+                {
+                    <td></td>
+                }
+                else
+                {
+                    <td>@item.Supplier.CompanyName</td>
+                }
+
+
+            </tr>
+            }
+
+        </tbody>
+    </table>
+    <table border="1">
+        <thead>
+            <tr>
+                <td>Kategori Adı</td>
+                <td>Tanımı</td>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Category item in Model.categories)
+            {
+                <tr>
+                    <td>@item.CategoryName</td>
+                    <td>@item.Description</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+</body>
+</html>
